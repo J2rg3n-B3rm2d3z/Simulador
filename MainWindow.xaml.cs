@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simulador.Screens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,20 +22,32 @@ namespace Simulador
     public partial class MainWindow : Window
     {
         private int _count = 0;
-
+        private Estructura_Arquitectura estructura_Arquitectura = new Estructura_Arquitectura();
+        private Acerca_de_Nosotros acerca_De_Nosotros = new Acerca_de_Nosotros();
         public MainWindow()
         {
             InitializeComponent();
-            
+            MyFrame.NavigationService.Navigate(acerca_De_Nosotros);
+            ResizeMode = ResizeMode.NoResize;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
             _count++;
-            boton1.Content = _count.ToString();
+            //boton1.Content = _count.ToString();
            
 
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.NavigationService.Navigate(acerca_De_Nosotros);
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            MyFrame.NavigationService.Navigate(estructura_Arquitectura);
         }
     }
 }
