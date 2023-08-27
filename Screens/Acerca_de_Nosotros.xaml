@@ -9,6 +9,10 @@
       Title="Acerca_de_Nosotros">
 
     <Grid>
-        <Label Content="Pantalla de Nosotros" FontSize="40" FontWeight="Black" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        
+        <Label Content="ELABORADO POR:" FontSize="30" FontWeight="Bold"  HorizontalContentAlignment="Center"/>
+        <Label Content="Jurgen Francisco Bermúdez Picado 2020-0290U" FontSize="30" FontWeight="Bold"  HorizontalContentAlignment="Center" Margin="0,82,0,-82"/>
+        <Label Content="Jeison Eduardo Chaver Amador 2020-0362U" FontSize="30" FontWeight="Bold"  HorizontalContentAlignment="Center" Margin="0,188,0,-188"/>
+        <Label Content="Maria Gabriela Robleto Gutierrez 2020-0339U" FontSize="30" FontWeight="Bold"  HorizontalContentAlignment="Center" Margin="0,287,0,-287"/>
     </Grid>
 </Page>
