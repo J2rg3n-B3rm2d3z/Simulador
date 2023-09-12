@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Simulador"
         mc:Ignorable="d"
-        Title="Simulador" Height="450" Width="800">
+        Title="Simulador de Registros de 2 Direcciones" Height="600" Width="990">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,12 +16,9 @@
             </MenuItem>
             <MenuItem Header="Estructura de la Arquitectura" Click="MenuItem_Click_1" >
             </MenuItem>
-            <MenuItem Header="Memoria" >
-            </MenuItem>
         </Menu>
         <Frame x:Name="MyFrame" NavigationUIVisibility="Hidden" Margin="0,27,0,0"/>
-
-
+        
         <!--<Button Name="boton1" Content="Hola Mundo"  Margin="0,194,0,0"  Height="23" Width="122" Click="Button_Click"/>-->
     </Grid>
 </Window>

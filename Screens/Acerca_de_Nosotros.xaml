@@ -5,14 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Simulador.Screens"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="990"
       Title="Acerca_de_Nosotros">
 
-    <Grid>
+    <Grid VerticalAlignment="Top">
         
         <Label Content="ELABORADO POR:" FontSize="30" FontWeight="Bold"  HorizontalContentAlignment="Center"/>
-        <Label Content="Jurgen Francisco Bermúdez Picado 2020-0290U" FontSize="30" FontWeight="Bold"  HorizontalContentAlignment="Center" Margin="0,82,0,-82"/>
-        <Label Content="Jeison Eduardo Chaver Amador 2020-0362U" FontSize="30" FontWeight="Bold"  HorizontalContentAlignment="Center" Margin="0,188,0,-188"/>
-        <Label Content="Maria Gabriela Robleto Gutierrez 2020-0339U" FontSize="30" FontWeight="Bold"  HorizontalContentAlignment="Center" Margin="0,287,0,-287"/>
+        <Label Content="Jurgen Francisco Bermúdez Picado 2020-0290U" FontSize="25" FontWeight="Bold"  HorizontalContentAlignment="Center" Margin="0,82,0,-82"/>
+        <Label Content="Jeison Eduardo Chaver Amador 2020-0362U" FontSize="25" FontWeight="Bold"  HorizontalContentAlignment="Center" Margin="0,188,0,-188"/>
+        <Label Content="Maria Gabriela Robleto Gutierrez 2020-0339U" FontSize="25" FontWeight="Bold"  HorizontalContentAlignment="Center" Margin="0,287,0,-287"/>
+        
     </Grid>
 </Page>
