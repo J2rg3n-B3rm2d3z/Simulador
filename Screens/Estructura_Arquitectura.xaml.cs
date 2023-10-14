@@ -28,6 +28,7 @@ namespace Simulador.Screens
         public Estructura_Arquitectura()
         {
             InitializeComponent();
+
             int cantReg = 8;                                                // Cantidad de Registros
             int cantIns = 16;                                               // Cantidad de instrucciones
             int cantMem = 256;                                               // Cantidad de Memoria
@@ -57,13 +58,13 @@ namespace Simulador.Screens
                 new Instruccion { Nombre = "INC", Valor = "0110" },           // Incrementa en 1 el registro seleccionado INC [Registro]
                 new Instruccion { Nombre = "DEC", Valor = "0111" },           // Decrementa en 1 el registro seleccionado DEC [Registro]
                 new Instruccion { Nombre = "JMP", Valor = "1000" },           
-                new Instruccion { Nombre = "BRN", Valor = "1001" },           // Va a la direccion o etiqueta si la bandera de signo es negativo BRN [Etiqueta]
-                new Instruccion { Nombre = "IN", Valor = "1010" },            // Obtiene los datos de entrada IN [Registro donde se guarda]
-                new Instruccion { Nombre = "OUT", Valor = "1011" },           // Muestra los datos seleciionado OUT [Registro que se quiere mostrar]
-                new Instruccion { Nombre = "HALT", Valor = "1100" },          // Terminar el programa
-                new Instruccion { Nombre = "EXP", Valor = "1101" },           // Son excepciones que muestran error
-                new Instruccion { Nombre = "EXP", Valor = "1110" },           // Son excepciones que muestran error
-                new Instruccion { Nombre = "EXP", Valor = "1111" },           // Son excepciones que muestran error
+                new Instruccion { Nombre = "JPN", Valor = "1001" },           // Va a la direccion o etiqueta si la bandera de signo es negativo BRN [Etiqueta]
+                new Instruccion { Nombre = "JPC", Valor = "1010" },            // Obtiene los datos de entrada IN [Registro donde se guarda]
+                new Instruccion { Nombre = "JPO", Valor = "1011" },           // Muestra los datos seleciionado OUT [Registro que se quiere mostrar]
+                new Instruccion { Nombre = "JPZ", Valor = "1100" },          // Terminar el programa
+                new Instruccion { Nombre = "HALT", Valor = "1101" },           // Son excepciones que muestran error
+                new Instruccion { Nombre = "IN", Valor = "1110" },           // Son excepciones que muestran error
+                new Instruccion { Nombre = "OUT", Valor = "1111" },           // Son excepciones que muestran error
             };
 
             foreach (var instruccion in instrucciones)

@@ -51,13 +51,13 @@
                 <DataGridTextColumn Header="Valor" Binding="{Binding Valor}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock HorizontalAlignment="Left" x:Name="MAR" Margin="498,55,0,0" TextWrapping="Wrap" Text="0000000000000000" x:Name="MAR" VerticalAlignment="Top" Width="104"/>
-        <TextBlock HorizontalAlignment="Left" x:Name="MDR" Margin="498,105,0,0" TextWrapping="Wrap" Text="0000000000000000" x:Name="MDR" VerticalAlignment="Top" Width="104"/>
-        <TextBlock HorizontalAlignment="Left" x:Name="PC" Margin="498,255,0,0" TextWrapping="Wrap" Text="0000000000000000" x:Name="PC" VerticalAlignment="Top" Width="104"/>
-        <TextBlock HorizontalAlignment="Left" x:Name="RY" Margin="37,285,0,0" TextWrapping="Wrap" Text="0000000000000000" x:Name="Y" VerticalAlignment="Top" Width="106"/>
-        <TextBlock HorizontalAlignment="Left" x:Name="RZ" Margin="110,410,0,0" TextWrapping="Wrap" Text="0000000000000000" x:Name="Z" VerticalAlignment="Top" Width="108"/>
-        <TextBlock HorizontalAlignment="Left" x:Name="FLAGS" Margin="291,359,0,0" TextWrapping="Wrap" Text="0" x:Name="FLAGS" VerticalAlignment="Top" Width="106"/>
-        <TextBlock HorizontalAlignment="Left" x:Name="IR" Margin="498,333,0,0" TextWrapping="Wrap" Text="0000000000000000" x:Name="IR" VerticalAlignment="Top" Width="113"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="MAR" Margin="498,55,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="104"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="MDR" Margin="498,105,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="104"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="PC" Margin="498,255,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="104"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="RY" Margin="37,285,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="106"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="RZ" Margin="110,410,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="108"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="FLAGS" Margin="291,359,0,0" TextWrapping="Wrap" Text="0"  VerticalAlignment="Top" Width="106"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="IR" Margin="498,333,0,0" TextWrapping="Wrap" Text="0000000000000000" VerticalAlignment="Top" Width="113"/>
 
     </Grid>
 </Page>
