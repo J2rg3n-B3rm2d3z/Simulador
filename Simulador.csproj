@@ -60,11 +60,13 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -86,6 +88,11 @@
     <Compile Include="Screens\Acerca_de_Nosotros.xaml.cs">
       <DependentUpon>Acerca_de_Nosotros.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\AssemblerFiles\sintaxis.cs" />
+    <Compile Include="Screens\Data\Data.cs" />
+    <Compile Include="Screens\Editor_Texto.xaml.cs">
+      <DependentUpon>Editor_Texto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Estructura_Arquitectura.xaml.cs">
       <DependentUpon>Estructura_Arquitectura.xaml</DependentUpon>
     </Compile>
@@ -102,6 +109,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Screens\Acerca_de_Nosotros.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Editor_Texto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,6 +139,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

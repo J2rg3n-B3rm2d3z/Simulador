@@ -1,98 +1,66 @@
-﻿using Simulador.Screens.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Markup;
 
-namespace Simulador.Screens
+namespace Simulador.Screens.Data
 {
-    /// <summary>
-    /// Lógica de interacción para Estructura_Arquitectura.xaml
-    /// </summary>
-    public partial class Estructura_Arquitectura : Page
+    static class Data
     {
+        public static Boolean initialization = false;
+        static int cantReg = 8;                                                // Cantidad de Registros
+        static int cantIns = 16;                                               // Cantidad de instrucciones
+        static int cantMem = 256;                                               // Cantidad de Memoria
 
-        /*
-         Nota: el valor de las variables debe de ser desde 0 al 64
-         */
+        public static Registro[] registros = new Registro[cantReg];
+        public static Instruccion[] instrucciones = new Instruccion[cantIns];         // Instruccines de bloque fijo
+        public static Memoria[] memoria = new Memoria[cantMem];
 
-        public Estructura_Arquitectura()
+
+        public static void Constructor()
         {
-            InitializeComponent();
-
-            if (!Data.Data.initialization)
+            for (int i = 0; i < cantReg; i++)                                   // Genera los registros necesarios para el procesador
             {
-                Data.Data.Constructor();
-            }
-
-            int cantReg = 8;                                                // Cantidad de Registros
-            int cantIns = 16;                                               // Cantidad de instrucciones
-            int cantMem = 256;                                               // Cantidad de Memoria
-           /* Registro[] registros = new Registro[cantReg];
-            Instruccion[] instrucciones = new Instruccion[cantIns];         // Instruccines de bloque fijo
-            Memoria[] memoria = new Memoria[cantMem];*/
-
-
-
-            /*for (int i=0; i<cantReg; i++)                                   // Genera los registros necesarios para el procesador
-            {
-                *//*registros[i] = new Registro 
+                registros[i] = new Registro
                 {
                     NumReg = $"R{i}",                                       // Le da su numero de registro
                     Valor = "0000000000000000"                              // Le da un valor al registro
-                };*//*
-
-                DataGridReg.Items.Add(Data.Data.registros[i]);                        // Agrega el registro creado al DataGrig
-            }*/
-
-            foreach (var registros in Data.Data.registros)
-            {
-                DataGridReg.Items.Add(registros);
+                };                        // Agrega el registro creado al DataGrig
             }
 
-            /*instrucciones = new Instruccion[]
+            instrucciones = new Instruccion[]
             {
                 new Instruccion { Nombre = "ADD", Valor = "0000" },
                 new Instruccion { Nombre = "SUB", Valor = "0001" },
                 new Instruccion { Nombre = "DIV", Valor = "0010" },
                 new Instruccion { Nombre = "MOD", Valor = "0011" },
                 new Instruccion { Nombre = "MUL", Valor = "0100" },
-                new Instruccion { Nombre = "MOV", Valor = "0101" },
+                new Instruccion { Nombre = "MOVE", Valor = "0101" },
                 new Instruccion { Nombre = "INC", Valor = "0110" },           // Incrementa en 1 el registro seleccionado INC [Registro]
                 new Instruccion { Nombre = "DEC", Valor = "0111" },           // Decrementa en 1 el registro seleccionado DEC [Registro]
-                new Instruccion { Nombre = "JMP", Valor = "1000" },           
-                new Instruccion { Nombre = "JPN", Valor = "1001" },           // Va a la direccion o etiqueta si la bandera de signo es negativo BRN [Etiqueta]
+                new Instruccion { Nombre = "JMP", Valor = "1000" },           // Va a la direccion o etiqueta si la bandera de signo es negativo BRN [Etiqueta]
+                new Instruccion { Nombre = "JPN", Valor = "1001" },           //  Va a la direccion o etiqueta si la bandera de signo es negativo BRN [Etiqueta]
                 new Instruccion { Nombre = "JPC", Valor = "1010" },            // Obtiene los datos de entrada IN [Registro donde se guarda]
                 new Instruccion { Nombre = "JPO", Valor = "1011" },           // Muestra los datos seleciionado OUT [Registro que se quiere mostrar]
                 new Instruccion { Nombre = "JPZ", Valor = "1100" },          // Terminar el programa
                 new Instruccion { Nombre = "HALT", Valor = "1101" },           // Son excepciones que muestran error
                 new Instruccion { Nombre = "IN", Valor = "1110" },           // Son excepciones que muestran error
                 new Instruccion { Nombre = "OUT", Valor = "1111" },           // Son excepciones que muestran error
-            };*/
+            };
 
-            foreach (var instruccion in Data.Data.instrucciones)
+            for (int i = 0; i < cantMem; i++)
             {
-                DataGridIns.Items.Add(instruccion);
-            }
-
-            for (int i = 0; i < cantMem; i++)                             
-            {
-                /*memoria[i] = new Memoria{
-                    NumMem = i,                                       
+                memoria[i] = new Memoria
+                {
+                    NumMem = i,
                     Valor = "0000000000000000"
-                };*/
-                DataGridMem.Items.Add(Data.Data.memoria[i]);
+                };
             }
+
+            initialization = true;
         }
 
         public class Instruccion
@@ -101,7 +69,7 @@ namespace Simulador.Screens
             public string Valor { get; set; }
         }
 
-        public class Registro 
+        public class Registro
         {
             public string NumReg { get; set; }
             public string Valor { get; set; }
@@ -148,10 +116,7 @@ namespace Simulador.Screens
 
             return binario;
         }
-
-        private void DataGridIns_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
     }
+
+
 }

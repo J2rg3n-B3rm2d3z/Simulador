@@ -24,6 +24,7 @@ namespace Simulador
         private int _count = 0;
         private Estructura_Arquitectura estructura_Arquitectura = new Estructura_Arquitectura();
         private Acerca_de_Nosotros acerca_De_Nosotros = new Acerca_de_Nosotros();
+        private Editor_Texto editor_Texto = new Editor_Texto();
         public MainWindow()
         {
             InitializeComponent();
@@ -48,6 +49,11 @@ namespace Simulador
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             MyFrame.NavigationService.Navigate(estructura_Arquitectura);
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            MyFrame.NavigationService.Navigate(editor_Texto);
         }
     }
 }

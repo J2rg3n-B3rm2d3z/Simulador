@@ -16,7 +16,7 @@
             </MenuItem>
             <MenuItem Header="Estructura de la Arquitectura" Click="MenuItem_Click_1" >
             </MenuItem>
-            <MenuItem Header="Editor">
+            <MenuItem Header="Editor" Click="MenuItem_Click_2">
             </MenuItem>
         </Menu>
         <Frame x:Name="MyFrame" NavigationUIVisibility="Hidden" Margin="0,27,0,0"/>
