@@ -13,15 +13,21 @@ namespace Simulador.Screens.Data
         public static Boolean initialization = false;
         static int cantReg = 8;                                                // Cantidad de Registros
         static int cantIns = 16;                                               // Cantidad de instrucciones
-        static int cantMem = 256;                                               // Cantidad de Memoria
+        static int cantMem = 64;                                               // Cantidad de Memoria
 
         public static Registro[] registros = new Registro[cantReg];
-        public static Instruccion[] instrucciones = new Instruccion[cantIns];         // Instruccines de bloque fijo
+        public static Instruccion[] instrucciones = new Instruccion[cantIns];         
+        public static List<Instruccion> instruccionsAuxiliar = new List<Instruccion>(); 
         public static Memoria[] memoria = new Memoria[cantMem];
+        public static List<Memoria> BanderaMemoria = new List<Memoria>();
+        public static int pc = 0;
 
 
         public static void Constructor()
         {
+            instruccionsAuxiliar.Clear();
+            BanderaMemoria.Clear();
+
             for (int i = 0; i < cantReg; i++)                                   // Genera los registros necesarios para el procesador
             {
                 registros[i] = new Registro
@@ -74,6 +80,8 @@ namespace Simulador.Screens.Data
             public string NumReg { get; set; }
             public string Valor { get; set; }
         }
+
+
 
         public class Memoria
         {

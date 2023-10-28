@@ -54,7 +54,7 @@
         <TextBlock HorizontalAlignment="Left" x:Name="MAR" Margin="498,55,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="104"/>
         <TextBlock HorizontalAlignment="Left" x:Name="MDR" Margin="498,105,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="104"/>
         <TextBlock HorizontalAlignment="Left" x:Name="PC" Margin="498,255,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="104"/>
-        <TextBlock HorizontalAlignment="Left" x:Name="RY" Margin="37,285,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="106"/>
+        <TextBlock HorizontalAlignment="Left" x:Name="RY" Margin="40,284,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="106"/>
         <TextBlock HorizontalAlignment="Left" x:Name="RZ" Margin="110,410,0,0" TextWrapping="Wrap" Text="0000000000000000"  VerticalAlignment="Top" Width="108"/>
         <TextBlock HorizontalAlignment="Left" x:Name="FLAGS" Margin="291,359,0,0" TextWrapping="Wrap" Text="0"  VerticalAlignment="Top" Width="106"/>
         <TextBlock HorizontalAlignment="Left" x:Name="IR" Margin="498,333,0,0" TextWrapping="Wrap" Text="0000000000000000" VerticalAlignment="Top" Width="113"/>

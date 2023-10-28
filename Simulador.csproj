@@ -88,8 +88,15 @@
     <Compile Include="Screens\Acerca_de_Nosotros.xaml.cs">
       <DependentUpon>Acerca_de_Nosotros.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\AssemblerFiles\Assembler.cs" />
     <Compile Include="Screens\AssemblerFiles\sintaxis.cs" />
+    <Compile Include="Screens\BoxInput.xaml.cs">
+      <DependentUpon>BoxInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Data\Data.cs" />
+    <Compile Include="Screens\Editor_Execute.xaml.cs">
+      <DependentUpon>Editor_Execute.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Editor_Texto.xaml.cs">
       <DependentUpon>Editor_Texto.xaml</DependentUpon>
     </Compile>
@@ -109,6 +116,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Screens\Acerca_de_Nosotros.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\BoxInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\Editor_Execute.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,6 +181,31 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\Imagen1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\play-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screens\Imagen2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\play-and-pause-button.png" />
+    <Resource Include="Recursos\stop-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screens\play-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screens\play-and-pause-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screens\stop-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\right-arrow-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

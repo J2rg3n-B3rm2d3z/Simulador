@@ -17,19 +17,22 @@
                 </MenuItem>
                 <MenuItem Header="Emsamblar" Click="MenuItem_Click_1">
                 </MenuItem>
-                <MenuItem Header="Ejecutar">
+                <MenuItem Header="Ejecutar" Click="MenuItem_Click_2">
                 </MenuItem>
                 <MenuItem Header="Detener">
                 </MenuItem>
-                <MenuItem Header="Step">
+                <MenuItem Header="Step" Click="MenuItem_Click_3">
                 </MenuItem>
             </Menu>
         </StackPanel>
 
         <Grid Margin="0,20,0,0" >
+            
+
             <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,10"/>
             <TextBox Name="txtEditor" />
         </Grid>
+        <Frame x:Name="MyFrame" NavigationUIVisibility="Hidden" Margin="0,20,0,0"/>
 
     </Grid>
 </Page>

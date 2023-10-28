@@ -114,7 +114,8 @@ namespace Simulador.Screens.AssemblerFiles
                         {
                             if (!string.IsNullOrEmpty(dataSplit[1]))
                             {
-                                if (Data.Data.registros.Count(x => x.NumReg.ToLower().Contains(dataSplit[1])) != 1 || dataFileData.Count(x => x.Contains(dataSplit[1])) != 1) return false;
+                                
+                                if (!Data.Data.registros.Any(x => x.NumReg.ToLower().Contains(dataSplit[1])) && !dataFileData1.Contains(dataSplit[1])) return false;
                             }
                             else
                             {
@@ -134,18 +135,18 @@ namespace Simulador.Screens.AssemblerFiles
                                 return false;
                             }
                         }
-                    } else if (dataSplit.Length == 1 && !data.Contains(".code") && !dataSplit[0].Contains("halt"))
+                    }
+                    else if (dataSplit.Length == 1 && !data.Contains(".code") && !dataSplit[0].Contains("halt"))
                     {
-                        
                         if (!dataSplit[0].EndsWith(":")) return false;
-                        
-
                     }
                 }
-                else if(!data.Contains(".data"))
+                else if(!data.Contains(".data") && !data.Contains("halt"))
                 {
+                    /*MessageBox.Show(data);*/
                     string[] dataSplit = data.Split(' ');
-                    if (dataSplit.Length > 2) return false;
+                    
+                    if (dataSplit.Length != 2) return false;
                     if (!int.TryParse(dataSplit[1], out int number)) return false;
 
                     if (Data.Data.registros.Count(x => x.NumReg.ToLower().Contains(dataSplit[0])) >= 1) return false;
@@ -155,9 +156,5 @@ namespace Simulador.Screens.AssemblerFiles
 
             return true;
         }
-
-        
-
-
     }
 }

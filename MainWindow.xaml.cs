@@ -55,5 +55,10 @@ namespace Simulador
         {
             MyFrame.NavigationService.Navigate(editor_Texto);
         }
+
+        private void MyFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            
+        }
     }
 }

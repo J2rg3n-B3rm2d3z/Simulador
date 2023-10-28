@@ -37,7 +37,7 @@ namespace Simulador.Screens
 
             int cantReg = 8;                                                // Cantidad de Registros
             int cantIns = 16;                                               // Cantidad de instrucciones
-            int cantMem = 256;                                               // Cantidad de Memoria
+            int cantMem = 64;                                               // Cantidad de Memoria
            /* Registro[] registros = new Registro[cantReg];
             Instruccion[] instrucciones = new Instruccion[cantIns];         // Instruccines de bloque fijo
             Memoria[] memoria = new Memoria[cantMem];*/
