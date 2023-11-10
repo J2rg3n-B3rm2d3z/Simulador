@@ -19,7 +19,7 @@
                 </MenuItem>
                 <MenuItem Header="Ejecutar" Click="MenuItem_Click_2">
                 </MenuItem>
-                <MenuItem Header="Detener">
+                <MenuItem Header="Detener" Click="MenuItem_Click_4">
                 </MenuItem>
                 <MenuItem Header="Step" Click="MenuItem_Click_3">
                 </MenuItem>
@@ -30,7 +30,14 @@
             
 
             <WrapPanel HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,10"/>
-            <TextBox Name="txtEditor" />
+            
+            <RichTextBox Name="richTextEditor" VerticalScrollBarVisibility="Auto">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="{Binding Text}" />
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
         </Grid>
         <Frame x:Name="MyFrame" NavigationUIVisibility="Hidden" Margin="0,20,0,0"/>
 

@@ -17,6 +17,7 @@ namespace Simulador.Screens.AssemblerFiles
         }
 
         public void setDataFile(List<string> dataFile) {
+            this.dataFile.Clear();
             this.dataFile = dataFile;
         }
 
@@ -71,6 +72,9 @@ namespace Simulador.Screens.AssemblerFiles
                 if(InCode)
                 {
                     string[] dataSplit = data.Split(' ');
+                    MessageBox.Show(dataSplit.Length.ToString());
+                    /*if(dataSplit.Length > 3 ) return false;*/
+
                     if (dataSplit.Length > 1)
                     {
                         if (dataSplit[0].Contains("move") || dataSplit[0].Contains("add") ||

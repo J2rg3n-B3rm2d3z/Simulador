@@ -45,11 +45,14 @@ namespace Simulador.Screens
             if (openFileDialog.ShowDialog() == true)
             {
                 MyFrame.Content = null;
-                dataFile = File.ReadAllText(openFileDialog.FileName);
-                txtEditor.Text = dataFile;
-                
-                Sintaxis.setDataFile(new List<string>(dataFile.ToLower().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)));
-                assembler.setDataFile(new List<string>(dataFile.ToLower().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)));
+                /*dataFile = File.ReadAllText(openFileDialog.FileName);*/
+                /*txtEditor.Text = File.ReadAllText(openFileDialog.FileName);*/
+
+                string CurrentFilePath = openFileDialog.FileName;
+                richTextEditor.Document = new FlowDocument(new Paragraph(new Run(File.ReadAllText(CurrentFilePath))));
+
+
+
             }
         }
 
@@ -83,8 +86,14 @@ namespace Simulador.Screens
 
             subBinary = subBinary.Substring(0, 12);
 
-            MessageBox.Show(subBinary);*/
+            */
 
+            string textData = new TextRange(richTextEditor.Document.ContentStart, richTextEditor.Document.ContentEnd).Text;
+
+            MessageBox.Show(textData);
+            Sintaxis.setDataFile(new List<string>());
+            Sintaxis.setDataFile(new List<string>(textData.ToLower().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)));
+            assembler.setDataFile(new List<string>(textData.ToLower().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)));
             bool d = Sintaxis.SintaxisResult();
             if (d)
             {
@@ -111,6 +120,11 @@ namespace Simulador.Screens
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
             editor_Execute.acciones();
+        }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Content = null;
         }
     }
 }

@@ -24,6 +24,10 @@ namespace Simulador.Screens
     {
         Uri arrowActive = new Uri("/Recursos/arrow.png", UriKind.Relative);
         Uri arrowDesactive = new Uri("/Recursos/play-removebg-preview.png", UriKind.Relative);
+        string ultimoResultado = "";
+        bool acarreo = false;
+        bool overflow = false;
+
 
         /*ObservableCollection<Data.Data.Registro> items = new ObservableCollection<Data.Data.Registro>();*/
 
@@ -173,7 +177,7 @@ namespace Simulador.Screens
             }
             else
             {
-                await addPC();
+                Data.Data.pc += 1;
             }
             
 
@@ -286,6 +290,8 @@ mdr -? bus (primer operando)*/
 
             barMARBus.Fill = Brushes.Black;
             barMARBus.Stroke = Brushes.Black;
+
+            await addPC();
 
             await Task.Delay(1000);
 
@@ -568,9 +574,9 @@ mdr -? bus (primer operando)*/
             barAluZ.Fill = Brushes.Red;
             barAluZ.Stroke = Brushes.Red;
             await Task.Delay(1000);
-            Data.Data.pc += 1;
+            
 
-            txtZ.Text = Convert.ToString(Data.Data.pc,2).PadLeft(8,'0');
+            txtZ.Text = Convert.ToString(Data.Data.pc + 1,2).PadLeft(8,'0');
 
             await Task.Delay(1000);
 
@@ -604,7 +610,7 @@ mdr -? bus (primer operando)*/
 
             await Task.Delay(1000);
 
-            txtPC.Text = Convert.ToString(Data.Data.pc, 2).PadLeft(8, '0');
+            txtPC.Text = Convert.ToString(Data.Data.pc + 1, 2).PadLeft(8, '0');
 
             await Task.Delay(1000);
             barPC.Fill = Brushes.Black;
@@ -884,7 +890,259 @@ mdr -? bus (primer operando)*/
                 barMemoriaMDR.Fill = Brushes.Black;
                 barMemoriaMDR.Stroke = Brushes.Black;
 
-            } else
+            } else if (operando1.Substring(1, 1).Contains("1"))
+            {
+                barBusIR.Fill = Brushes.Red;
+                barBusIR.Stroke = Brushes.Red;
+                imgArrowBusIR1.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+
+                barBusIR.Fill = Brushes.Black;
+                barBusIR.Stroke = Brushes.Black;
+                imgArrowBusIR2.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+                barMAR.Fill = Brushes.Red;
+                barMAR.Stroke = Brushes.Red;
+                imgMAR.Source = new BitmapImage(arrowActive);
+
+                /*barBusIR.Fill = Brushes.Black;
+                barBusIR.Stroke = Brushes.Black;
+                imgArrowBusIR1.Source = new BitmapImage(arrowDesactive);*/
+
+                await Task.Delay(1000);
+
+                txtMAR.Text = operando1;
+
+                await Task.Delay(1000);
+
+                barMAR.Fill = Brushes.Black;
+                barMAR.Stroke = Brushes.Black;
+                imgMAR.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+                barMARBus.Fill = Brushes.Red;
+                barMARBus.Stroke = Brushes.Red;
+
+                await Task.Delay(1000);
+
+                barMARBus.Fill = Brushes.Black;
+                barMARBus.Stroke = Brushes.Black;
+
+                await Task.Delay(1000);
+
+                barMemoryMAR.Fill = Brushes.Red;
+                barMemoryMAR.Stroke = Brushes.Red;
+                imgMemoryMAR.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+                barMemoriaMDR.Fill = Brushes.Red;
+                barMemoriaMDR.Stroke = Brushes.Red;
+                imgMemoryMDR.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+
+                barMemoryMAR.Fill = Brushes.Black;
+                barMemoryMAR.Stroke = Brushes.Black;
+                imgMemoryMAR.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+                barBusMDR.Fill = Brushes.Red;
+                barBusMDR.Stroke = Brushes.Red;
+                imgMDR3.Source = new BitmapImage(arrowActive);
+
+                
+
+                await Task.Delay(1000);
+
+                int index = Data.Data.instruccionsAuxiliar.FindIndex(x => x.Nombre.Equals(operando1));
+                MessageBox.Show(index.ToString());
+
+                string info = Data.Data.instruccionsAuxiliar[index].Valor;
+                MessageBox.Show(info);
+                txtMDR.Text = info;
+
+                await Task.Delay(1000);
+                barBusMDR.Fill = Brushes.Black;
+                barBusMDR.Stroke = Brushes.Black;
+                imgMDR3.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+                barMDR.Fill = Brushes.Red;
+                barMDR.Stroke = Brushes.Red;
+                imgMDR1.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+
+                barMDR.Fill = Brushes.Black;
+                barMDR.Stroke = Brushes.Black;
+                imgMDR1.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+                barAluY.Fill = Brushes.Red;
+                barAluY.Stroke = Brushes.Red;
+                barY.Fill = Brushes.Red;
+                barY.Stroke = Brushes.Red;
+                imgArrowAluY2.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+
+                txtY.Text = info;
+
+                await Task.Delay(1000);
+                barAluY.Fill = Brushes.Black;
+                barAluY.Stroke = Brushes.Black;
+
+                barY.Fill = Brushes.Black;
+                barY.Stroke = Brushes.Black;
+
+                imgArrowAluY2.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+                barBusIR.Fill = Brushes.Red;
+                barBusIR.Stroke = Brushes.Red;
+                imgArrowBusIR1.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+
+                barBusIR.Fill = Brushes.Black;
+                barBusIR.Stroke = Brushes.Black;
+                imgArrowBusIR2.Source = new BitmapImage(arrowDesactive);
+                imgArrowBusIR1.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+
+                barRegisBus.Fill = Brushes.Red;
+                barRegisBus.Stroke = Brushes.Red;
+                imgArrowRegisBus2.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+
+                imgArrowRegisBus2.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+                imgArrowRegisBus1.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+
+                barRegisBus.Fill = Brushes.Black;
+                barRegisBus.Stroke = Brushes.Black;
+                imgArrowRegisBus1.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+
+                barAluX1.Fill = Brushes.Red;
+                barAluX1.Stroke = Brushes.Red;
+
+                barAlux2.Fill = Brushes.Red;
+                barAlux2.Stroke = Brushes.Red;
+
+                imgArrowAluX2.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+
+                barAluX1.Fill = Brushes.Black;
+                barAluX1.Stroke = Brushes.Black;
+
+                barAlux2.Fill = Brushes.Black;
+                barAlux2.Stroke = Brushes.Black;
+
+                imgArrowAluX2.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+                barAluZ.Stroke = Brushes.Red;
+                barAluZ.Fill = Brushes.Red;
+
+                await Task.Delay(1000);
+
+
+
+                if (instruccion.Equals("0000"))
+                {
+                    txtZ.Text = Convert.ToString((Convert.ToInt32(info, 2) + Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)), 2).PadLeft(6, '0');
+                }
+                else if (instruccion.Equals("0001"))
+                {
+                    txtZ.Text = (Convert.ToInt32(info, 2) - Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2) ).ToString();
+                }
+                else if (instruccion.Equals("0010"))
+                {
+                    txtZ.Text = (Convert.ToInt32(info, 2) / Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                }
+                else if (instruccion.Equals("0011"))
+                {
+                    txtZ.Text = (Convert.ToInt32(info, 2) % Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                }
+                else if (instruccion.Equals("0100"))
+                {
+                    txtZ.Text = (Convert.ToInt32(info, 2) * Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                }
+
+                await Task.Delay(1000);
+
+                barAluZ.Stroke = Brushes.Black;
+                barAluZ.Fill = Brushes.Black;
+
+                await Task.Delay(1000);
+
+                barZBus.Fill = Brushes.Red;
+                barZBus.Stroke = Brushes.Red;
+
+                imgArrowZBus.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+
+                barZBus.Fill = Brushes.Black;
+                barZBus.Stroke = Brushes.Black;
+
+                imgArrowZBus.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+
+                barMDR.Fill = Brushes.Red;
+                barMDR.Stroke = Brushes.Red;
+                imgMDR.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+                txtMDR.Text = txtZ.Text;
+
+                await Task.Delay(1000);
+                barMDR.Fill = Brushes.Black;
+                barMDR.Stroke = Brushes.Black;
+                imgMDR.Source = new BitmapImage(arrowDesactive);
+
+                await Task.Delay(1000);
+                barBusMDR.Fill= Brushes.Red;
+                barBusMDR.Stroke= Brushes.Red;
+
+                await Task.Delay(1000);
+                barBusMDR.Fill = Brushes.Black;
+                barBusMDR.Stroke = Brushes.Black;
+
+                await Task.Delay(1000);
+                barMemoriaMDR.Fill = Brushes.Red;
+                barMemoriaMDR.Stroke = Brushes.Red;
+                imgMemoryMDR2.Source = new BitmapImage(arrowActive);
+
+                await Task.Delay(1000);
+                barMemoriaMDR.Fill = Brushes.Red;
+                barMemoriaMDR.Stroke = Brushes.Red;
+                imgMemoryMDR2.Source = new BitmapImage(arrowDesactive);
+
+                Data.Data.instruccionsAuxiliar[index].Valor = txtZ.Text;
+
+            }
+            else
             {
 
                 barBusIR.Fill = Brushes.Red;
@@ -1061,6 +1319,9 @@ mdr -? bus (primer operando)*/
                 imgArrowRegisBus2.Source = new BitmapImage(arrowDesactive);
 
             }
+
+            ultimoResultado = txtZ.Text;
+
                 await Task.Delay(1000);
         }
 
@@ -1352,7 +1613,7 @@ mdr -? bus (primer operando)*/
 
             barRegisBus.Stroke = Brushes.Black;
             barRegisBus.Fill = Brushes.Black;
-            imgArrowRegisBus2.Source = new BitmapImage(arrowDesactive);
+            imgArrowRegisBus1.Source = new BitmapImage(arrowDesactive);
 
             await Task.Delay(1000);
 
@@ -1385,7 +1646,8 @@ mdr -? bus (primer operando)*/
             barBusMDR.Stroke = Brushes.Black;
             await Task.Delay(1000);
 
-            MessageBox.Show(txtMDR.Text,"Resultados");
+           
+            MessageBox.Show(Convert.ToInt32(txtMDR.Text, 2).ToString(), "Resultados");
 
             barIO.Stroke = Brushes.Black;
             barIO.Fill = Brushes.Black;
@@ -1397,6 +1659,40 @@ mdr -? bus (primer operando)*/
 
         }
 
+        private async Task jump()
+        {
+            string instruccion = Data.Data.memoria[Data.Data.pc].Valor.Substring(0, 4);
+            string jump = Data.Data.memoria[Data.Data.pc].Valor.Substring(4, 12);
+
+            if (instruccion.Equals("1000"))
+            {
+
+            }
+            else if (instruccion.Equals("1001"))
+            {
+
+            }
+            else if (instruccion.Equals("1010"))
+            {
+
+            }
+            else if (instruccion.Equals("1011"))
+            {
+
+            }
+            else if (instruccion.Equals("1100"))
+            {
+
+            }
+
+        }
+
+
+                /*new Instruccion { Nombre = "JMP", Valor = "1000" },           
+                new Instruccion { Nombre = "JPN", Valor = "1001" },           
+                new Instruccion { Nombre = "JPC", Valor = "1010" },            
+                new Instruccion { Nombre = "JPO", Valor = "1011" },           
+                new Instruccion { Nombre = "JPZ", Valor = "1100" }, */
 
 
 
