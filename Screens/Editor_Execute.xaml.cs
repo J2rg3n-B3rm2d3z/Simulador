@@ -960,10 +960,10 @@ mdr -? bus (primer operando)*/
                 await Task.Delay(1000);
 
                 int index = Data.Data.instruccionsAuxiliar.FindIndex(x => x.Nombre.Equals(operando1));
-                MessageBox.Show(index.ToString());
+                /*MessageBox.Show(index.ToString());*/
 
                 string info = Data.Data.instruccionsAuxiliar[index].Valor;
-                MessageBox.Show(info);
+                /*MessageBox.Show(info);*/
                 txtMDR.Text = info;
 
                 await Task.Delay(1000);

@@ -105,7 +105,7 @@ namespace Simulador.Screens.AssemblerFiles
                             char letra = char.Parse(dataSplit[1]);
                             string binario6Bits = "1" + Convert.ToString((int)letra - 96, 2).PadLeft(5, '0');
                             assemblarBinario += binario6Bits;
-                            MessageBox.Show(binario6Bits);
+                            /*MessageBox.Show(binario6Bits);*/
 
                             if (Data.Data.instruccionsAuxiliar.Count(x => x.Nombre == binario6Bits) < 1)
                                 Data.Data.instruccionsAuxiliar.Add(new Data.Data.Instruccion { Nombre = binario6Bits, Valor = "0000" });
@@ -122,7 +122,7 @@ namespace Simulador.Screens.AssemblerFiles
                                     letra = char.Parse(match.Groups[2].Value);
                                     binario6Bits = Convert.ToString(int.Parse(match.Groups[2].Value), 2).PadLeft(6, '0');
                                     assemblarBinario += binario6Bits;
-                                    MessageBox.Show(binario6Bits);
+                                    /*MessageBox.Show(binario6Bits);*/
                                 }
 
                             }
@@ -131,7 +131,7 @@ namespace Simulador.Screens.AssemblerFiles
                                 letra = char.Parse(dataSplit[2]);
                                 binario6Bits = "1" + Convert.ToString((int)letra - 96, 2).PadLeft(5, '0');
                                 assemblarBinario += binario6Bits;
-                                MessageBox.Show(binario6Bits);
+                                /*MessageBox.Show(binario6Bits);*/
 
                                 if (Data.Data.instruccionsAuxiliar.Count(x => x.Nombre == binario6Bits) < 1)
                                     Data.Data.instruccionsAuxiliar.Add(new Data.Data.Instruccion { Nombre = binario6Bits, Valor = "0000" });

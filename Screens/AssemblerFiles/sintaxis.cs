@@ -72,7 +72,7 @@ namespace Simulador.Screens.AssemblerFiles
                 if(InCode)
                 {
                     string[] dataSplit = data.Split(' ');
-                    MessageBox.Show(dataSplit.Length.ToString());
+                   /* MessageBox.Show(dataSplit.Length.ToString());*/
                     /*if(dataSplit.Length > 3 ) return false;*/
 
                     if (dataSplit.Length > 1)

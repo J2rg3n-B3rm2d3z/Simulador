@@ -90,7 +90,7 @@ namespace Simulador.Screens
 
             string textData = new TextRange(richTextEditor.Document.ContentStart, richTextEditor.Document.ContentEnd).Text;
 
-            MessageBox.Show(textData);
+            /*MessageBox.Show(textData);*/
             Sintaxis.setDataFile(new List<string>());
             Sintaxis.setDataFile(new List<string>(textData.ToLower().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)));
             assembler.setDataFile(new List<string>(textData.ToLower().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)));
