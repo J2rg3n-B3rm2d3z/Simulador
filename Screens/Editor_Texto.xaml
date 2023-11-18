@@ -15,13 +15,15 @@
                 </MenuItem>
                 <MenuItem Header="Cerrar" >
                 </MenuItem>
-                <MenuItem Header="Emsamblar" Click="MenuItem_Click_1">
+                <MenuItem x:Name="btnEnsamblar" Header="Emsamblar" Click="MenuItem_Click_1">
                 </MenuItem>
-                <MenuItem Header="Ejecutar" Click="MenuItem_Click_2">
+                <MenuItem x:Name="btnEjecutar" Header="Ejecutar" Click="MenuItem_Click_2" IsEnabled="False">
                 </MenuItem>
-                <MenuItem Header="Detener" Click="MenuItem_Click_4">
+                <MenuItem x:Name="btnDetener" Header="Detener" Click="MenuItem_Click_4" IsEnabled="False">
                 </MenuItem>
-                <MenuItem Header="Step" Click="MenuItem_Click_3">
+                <MenuItem x:Name="btnPaso" Header="Step" Click="MenuItem_Click_3" IsEnabled="False">
+                </MenuItem>
+                <MenuItem x:Name="btnRebobinar" Header="Rebobinar" IsEnabled="False" Click="btnRebobinar_Click">
                 </MenuItem>
             </Menu>
         </StackPanel>

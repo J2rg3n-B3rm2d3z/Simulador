@@ -28,14 +28,7 @@ namespace Simulador.Screens.Data
             instruccionsAuxiliar.Clear();
             BanderaMemoria.Clear();
 
-            for (int i = 0; i < cantReg; i++)                                   // Genera los registros necesarios para el procesador
-            {
-                registros[i] = new Registro
-                {
-                    NumReg = $"R{i}",                                       // Le da su numero de registro
-                    Valor = "0000000000000000"                              // Le da un valor al registro
-                };                        // Agrega el registro creado al DataGrig
-            }
+            intruccion_init();
 
             instrucciones = new Instruccion[]
             {
@@ -67,6 +60,18 @@ namespace Simulador.Screens.Data
             }
 
             initialization = true;
+        }
+
+        public static void intruccion_init()
+        {
+            for (int i = 0; i < cantReg; i++)                                   // Genera los registros necesarios para el procesador
+            {
+                registros[i] = new Registro
+                {
+                    NumReg = $"R{i}",                                       // Le da su numero de registro
+                    Valor = "0000000000000000"                              // Le da un valor al registro
+                };                        // Agrega el registro creado al DataGrig
+            }
         }
 
         public class Instruccion

@@ -130,7 +130,7 @@
         </Image>
         <Rectangle x:Name="barBusIR" HorizontalAlignment="Left" Height="2                    " Margin="470,273,0,0" Stroke="Black" VerticalAlignment="Top" Width="33" Fill="Black"/>
         <Image x:Name="imgIO" HorizontalAlignment="Left" Height="14" Margin="762,307,0,0" VerticalAlignment="Top" Width="16" Source="/Screens/play-removebg-preview.png"/>
-        <Image x:Name="imgArrowBusIR1" HorizontalAlignment="Left" Height="14" Margin="466,267,0,0" VerticalAlignment="Top" Width="16" Source="/Screens/play-removebg-preview.png" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="imgArrowBusIR1" HorizontalAlignment="Left" Height="14" Margin="469,267,0,0" VerticalAlignment="Top" Width="16" Source="/Screens/play-removebg-preview.png" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

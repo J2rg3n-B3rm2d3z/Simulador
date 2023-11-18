@@ -60,33 +60,12 @@ namespace Simulador.Screens
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
+            Data.Data.Constructor();
 
-            /*BoxInput inputBox = new BoxInput();
-            bool? result = inputBox.ShowDialog();*/
 
             char letra = 'z';
             int dr = (int)letra - 96;
-            /*string operando2 = Data.Data.memoria[2].Valor.Substring(6, 11);*/
-
-            /*MessageBox.Show(Data.Data.memoria[2].Valor.Substring(10,6));*/
-            /*int dr = (int)letra;*/
-
-            /*string subBinary = "";
-            foreach (char letra in letra1)
-            {
-                string binario6Bits = Convert.ToString((int)letra, 2).PadLeft(8, '0');
-                subBinary += binario6Bits.Substring(0, 2);
-            }
-
-            if (subBinary.Length < 12)
-            {
-                string binario6Bits = Convert.ToString(int.Parse(subBinary), 2).PadLeft(12, '0');
-                subBinary = binario6Bits;
-            }
-
-            subBinary = subBinary.Substring(0, 12);
-
-            */
+            
 
             string textData = new TextRange(richTextEditor.Document.ContentStart, richTextEditor.Document.ContentEnd).Text;
 
@@ -98,7 +77,8 @@ namespace Simulador.Screens
             if (d)
             {
 
-                
+                btnEjecutar.IsEnabled = true;
+
                 MessageBox.Show("Sintaxis Correcta");
                 assembler.SuccessAssembler();
 
@@ -112,6 +92,11 @@ namespace Simulador.Screens
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
+            btnEnsamblar.IsEnabled = false;
+            btnPaso.IsEnabled = true;
+            btnDetener.IsEnabled = true;
+            btnRebobinar.IsEnabled = true;
+
             editor_Execute = new Editor_Execute();
             MyFrame.NavigationService.Navigate(editor_Execute );
             
@@ -124,7 +109,18 @@ namespace Simulador.Screens
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
         {
+            btnEnsamblar.IsEnabled = true;
+            btnPaso.IsEnabled = false;
+            btnDetener.IsEnabled = false;
+            btnRebobinar.IsEnabled = false;
             MyFrame.Content = null;
+        }
+
+        private void btnRebobinar_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Content = null;
+            editor_Execute = new Editor_Execute();
+            MyFrame.NavigationService.Navigate(editor_Execute);
         }
     }
 }

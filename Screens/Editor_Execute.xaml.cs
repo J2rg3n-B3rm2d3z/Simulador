@@ -34,12 +34,15 @@ namespace Simulador.Screens
         public Editor_Execute()
         {
 
+            Data.Data.pc = 0;
 
             InitializeComponent();
             if (!Data.Data.initialization)
             {
                 Data.Data.Constructor();
             }
+
+            Data.Data.intruccion_init();
 
             int cantReg = 8;                                                // Cantidad de Registros
             int cantIns = 16;                                               // Cantidad de instrucciones
@@ -62,6 +65,11 @@ namespace Simulador.Screens
             }*/
 
             /*DataGridReg.ItemsSource = Data.Data.registros;*/
+
+            DataGridIns.Items.Clear();
+            DataGridReg.Items.Clear();
+            DataGridMem.Items.Clear();
+
             foreach (var registros in Data.Data.registros)
             {
                 /*items.Add(registros);*/
@@ -99,6 +107,15 @@ namespace Simulador.Screens
                 DataGridMem.Items.Add(Data.Data.memoria[i]);
             }
 
+            
+
+
+
+            foreach (var variables in Data.Data.instruccionsAuxiliar)
+            {
+                DataGridMem.Items.Add(variables);
+            }
+
 
             /*incDec();*/
 
@@ -134,8 +151,19 @@ namespace Simulador.Screens
 
             string instruccionAux = Data.Data.memoria[Data.Data.pc].Valor.Substring(12, 4);
             string instruccion = Data.Data.memoria[Data.Data.pc].Valor.Substring(0, 4);
+
             
-            await pcMemoryIR();
+
+            if (instruccionAux.Contains("1111"))
+            {
+                await addPC();
+                Data.Data.pc += 1;
+                return;
+            }
+            else
+            {
+                await pcMemoryIR();
+            }
 
             if (instruccion.Contains("0000") || instruccion.Contains("0001") ||
                 instruccion.Contains("0010") || instruccion.Contains("0011") || instruccion.Contains("0100"))
@@ -143,7 +171,6 @@ namespace Simulador.Screens
                 await operation();
 
             }
-
             else if (instruccion.Contains("0101"))
             {
 
@@ -155,6 +182,11 @@ namespace Simulador.Screens
 
                 await incDec();
             }
+            else if (instruccion.Contains("1000") || instruccion.Contains("1001") ||
+                instruccion.Contains("1010") || instruccion.Contains("1011") || instruccion.Contains("1100"))
+            {
+                await jump();
+            }
             else if (instruccion.Contains("1110"))
             {
                 await IO();
@@ -164,11 +196,6 @@ namespace Simulador.Screens
                 await Output();
             }
 
-            else if (instruccion.Contains("1101"))
-            {
-
-                
-            }
 
             if (instruccion.Contains("1101"))
             {
@@ -822,6 +849,7 @@ mdr -? bus (primer operando)*/
                 if (instruccion.Equals("0000"))
                 {
                     txtZ.Text =Convert.ToString( (Convert.ToInt32(info, 2) + Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2)),2).PadLeft(6,'0');
+                    
                 }
                 else if (instruccion.Equals("0001"))
                 {
@@ -829,7 +857,17 @@ mdr -? bus (primer operando)*/
                 }
                 else if (instruccion.Equals("0010"))
                 {
-                    txtZ.Text = ( Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2) / Convert.ToInt32(info, 2)).ToString();
+                    try
+                    {
+                        txtZ.Text = (Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2) / Convert.ToInt32(info, 2)).ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        ultimoResultado = "";
+                        overflow = true;
+                        return; 
+                    }
+                    
                 }
                 else if (instruccion.Equals("0011"))
                 {
@@ -837,8 +875,23 @@ mdr -? bus (primer operando)*/
                 }
                 else if (instruccion.Equals("0100"))
                 {
-                    txtZ.Text = (Convert.ToInt32(info, 2) * Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2)).ToString();
+
+                    try
+                    {
+                        txtZ.Text = (Convert.ToInt32(info, 2) * Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2)).ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        ultimoResultado = "";
+                        overflow = true;
+                        return;
+                    }
                 }
+
+                overflow = false;
+
+
+                ultimoResultado = txtZ.Text;
 
                 await Task.Delay(1000);
 
@@ -1664,13 +1717,122 @@ mdr -? bus (primer operando)*/
             string instruccion = Data.Data.memoria[Data.Data.pc].Valor.Substring(0, 4);
             string jump = Data.Data.memoria[Data.Data.pc].Valor.Substring(4, 12);
 
+            barBusIR.Fill = Brushes.Red;
+            barBusIR.Stroke = Brushes.Red;
+            imgArrowBusIR1.Source = new BitmapImage(arrowActive);
+
+            await Task.Delay(1000);
+
+            barBusIR.Fill = Brushes.Black;
+            barBusIR.Stroke = Brushes.Black;
+            imgArrowBusIR1.Source = new BitmapImage(arrowDesactive);
+
+            await Task.Delay(1000);
+
+            barMAR.Fill = Brushes.Red;
+            barMAR.Stroke = Brushes.Red;
+            imgMAR.Source = new BitmapImage(arrowActive);
+
+            await Task.Delay(1000);
+
+            txtMAR.Text = jump;
+
+            await Task.Delay(1000);
+
+            barMAR.Fill = Brushes.Black;
+            barMAR.Stroke = Brushes.Black;
+            imgMAR.Source = new BitmapImage(arrowDesactive);
+
+            await Task.Delay(1000);
+
+            barMARBus.Fill = Brushes.Red;
+            barMARBus.Stroke = Brushes.Red;
+
+            await Task.Delay(1000);
+
+            barMARBus.Fill = Brushes.Black;
+            barMARBus.Stroke = Brushes.Black;
+
+            await Task.Delay(1000);
+
+            barMemoryMAR.Stroke = Brushes.Red;
+            barMemoryMAR.Fill = Brushes.Red;
+            imgMemoryMAR.Source = new BitmapImage(arrowActive);
+            
+            await Task.Delay(1000);
+
+            barMemoryMAR.Stroke = Brushes.Black;
+            barMemoryMAR.Fill = Brushes.Black;
+            imgMemoryMAR.Source = new BitmapImage(arrowDesactive);
+
+            await Task.Delay(1000);
+
+            barMemoriaMDR.Fill = Brushes.Red;
+            barMemoriaMDR.Stroke = Brushes.Red;
+            imgMemoryMDR.Source = new BitmapImage(arrowActive);
+
+            await Task.Delay(1000);
+
+            barMemoriaMDR.Fill = Brushes.Black;
+            barMemoriaMDR.Stroke = Brushes.Black;
+            imgMemoryMDR.Source = new BitmapImage(arrowDesactive);
+
+            await Task.Delay(1000);
+
+            barBusMDR.Fill= Brushes.Red;
+            barBusMDR.Stroke= Brushes.Red;
+            imgMDR3.Source = new BitmapImage(arrowActive);
+
+            await Task.Delay(1000);
+
+            int index = Data.Data.BanderaMemoria.FindIndex(x => x.Valor.Equals(jump));
+            string info = Data.Data.BanderaMemoria[index].NumMem.ToString();
+
+            MessageBox.Show(info);
+
+            txtMDR.Text = Convert.ToString(int.Parse(info), 2).PadLeft(6, '0'); ;
+
+            await Task.Delay(1000);
+
+            barBusMDR.Fill = Brushes.Black;
+            barBusMDR.Stroke = Brushes.Black;
+            imgMDR3.Source = new BitmapImage(arrowDesactive);
+
+            await Task.Delay(1000);
+
+            barMDR.Fill = Brushes.Red;
+            barMDR.Stroke = Brushes.Red;
+            imgMDR1.Source = new BitmapImage(arrowActive);
+
+            await Task.Delay(1000);
+
+            barMDR.Fill = Brushes.Black;
+            barMDR.Stroke = Brushes.Black;
+            imgMDR1.Source = new BitmapImage(arrowDesactive);
+
+            await Task.Delay(1000);
+
+            barPC.Stroke = Brushes.Red;
+            barPC.Fill = Brushes.Red;
+            imgPC2.Source = new BitmapImage(arrowActive);
+
+            await Task.Delay(1000);
+
             if (instruccion.Equals("1000"))
             {
-
+                txtPC.Text = txtMDR.Text;
+                Data.Data.pc = Data.Data.BanderaMemoria[index].NumMem-1;
             }
             else if (instruccion.Equals("1001"))
             {
-
+                if (!overflow)
+                {
+                    if(int.Parse(ultimoResultado) < 0)
+                    {
+                        txtPC.Text = txtMDR.Text;
+                        Data.Data.pc = Data.Data.BanderaMemoria[index].NumMem - 1;
+                    }
+                }
             }
             else if (instruccion.Equals("1010"))
             {
@@ -1678,12 +1840,35 @@ mdr -? bus (primer operando)*/
             }
             else if (instruccion.Equals("1011"))
             {
-
+                if (overflow)
+                {
+                    txtPC.Text = txtMDR.Text;
+                    Data.Data.pc = Data.Data.BanderaMemoria[index].NumMem - 1;
+                }
             }
             else if (instruccion.Equals("1100"))
             {
-
+                if (!overflow)
+                {
+                    if (int.Parse(ultimoResultado) == 0)
+                    {
+                        txtPC.Text = txtMDR.Text;
+                        Data.Data.pc = Data.Data.BanderaMemoria[index].NumMem - 1;
+                    }
+                }
             }
+
+            
+
+            await Task.Delay(1000);
+
+            barPC.Stroke = Brushes.Black;
+            barPC.Fill = Brushes.Black;
+            imgPC2.Source = new BitmapImage(arrowDesactive);
+
+           
+
+            
 
         }
 
