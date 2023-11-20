@@ -2228,7 +2228,7 @@ mdr -? bus (primer operando)*/
                     barMDR.Stroke = Brushes.Black;
 
                     imgMDR1.Source = new BitmapImage(arrowDesactive);
-                    MessageBox.Show(Data.Data.pc.ToString());
+                    
                     string operando = Data.Data.memoria[Data.Data.pc - 1].Valor.Substring(4, 6);
                     Data.Data.registros[Convert.ToInt32(operando, 2)].Valor = txtMDR.Text;
 
