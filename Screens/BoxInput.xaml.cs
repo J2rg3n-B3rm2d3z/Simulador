@@ -30,7 +30,8 @@ namespace Simulador.Screens
 
         private void Aceptar_Click(object sender, RoutedEventArgs e)
         {
-            InputText = txtInput.Text;
+            
+            InputText = Convert.ToString(int.Parse(txtInput.Text), 2).PadLeft(8, '0');
             DialogResult = true;
             Close();
         }

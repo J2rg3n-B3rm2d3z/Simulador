@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -24,6 +25,8 @@ namespace Simulador.Screens
     {
         Uri arrowActive = new Uri("/Recursos/arrow.png", UriKind.Relative);
         Uri arrowDesactive = new Uri("/Recursos/play-removebg-preview.png", UriKind.Relative);
+        Uri ledOff = new Uri("/Recursos/led_off.png", UriKind.Relative);
+        Uri ledOn = new Uri("/Recursos/led_on.png", UriKind.Relative);
         string ultimoResultado = "";
         bool acarreo = false;
         bool overflow = false;
@@ -1516,16 +1519,24 @@ mdr -? bus (primer operando)*/
 
             await Task.Delay(1000);
 
+            barBusIR.Fill = Brushes.Black;
+            barBusIR.Stroke = Brushes.Black;
+            imgArrowBusIR1.Source = new BitmapImage(arrowDesactive);
+
+            await Task.Delay(1000);
+
             barMAR.Fill = Brushes.Red;
             barMAR.Stroke = Brushes.Red;
 
             imgMAR.Source = new BitmapImage(arrowActive);
 
             await Task.Delay(1000);
+            barMAR.Fill = Brushes.Black;
+            barMAR.Stroke = Brushes.Black;
 
-            barBusIR.Fill = Brushes.Black;
-            barBusIR.Stroke = Brushes.Black;
-            imgArrowBusIR1.Source = new BitmapImage(arrowDesactive);
+            imgMAR.Source = new BitmapImage(arrowDesactive);
+
+           
 
             await Task.Delay(1000);
 
@@ -1533,10 +1544,11 @@ mdr -? bus (primer operando)*/
             barMARBus.Stroke = Brushes.Red;
 
             await Task.Delay(1000);
-            barMAR.Fill = Brushes.Black;
-            barMAR.Stroke = Brushes.Black;
 
-            imgMAR.Source = new BitmapImage(arrowDesactive);
+            barMARBus.Fill = Brushes.Black;
+            barMARBus.Stroke = Brushes.Black;
+
+            
 
             await Task.Delay(1000);
 
@@ -1556,72 +1568,55 @@ mdr -? bus (primer operando)*/
 
         private async Task Input(string operation)
         {
-            BoxInput inputBox = new BoxInput();
-            bool? result = inputBox.ShowDialog();
 
-            if (result == true)
-            {
-                string userInput = inputBox.InputText;
+            await Task.Delay(1000);
 
-                barBusMDR.Fill = Brushes.Red;
-                barBusMDR.Stroke = Brushes.Red;
-                imgMDR3.Source = new BitmapImage(arrowActive);
+            barIO.Stroke = Brushes.Black;
+            barIO.Fill = Brushes.Black;
+            imgIO.Source = new BitmapImage(arrowDesactive);
 
-                await Task.Delay(1000);
+            await Task.Delay(1000);
 
-                barIO.Stroke = Brushes.Black;
-                barIO.Fill = Brushes.Black;
+            barIO1.Fill = Brushes.Red;
+            barIO1.Stroke = Brushes.Red;
 
-                imgIO.Source = new BitmapImage(arrowDesactive);
+            barIN1.Fill = Brushes.Red;
+            barIN1.Stroke = Brushes.Red;
 
-                await Task.Delay(1000);
+            imgIN1.Source = new BitmapImage(arrowActive);
 
-                txtMDR.Text = Convert.ToString(int.Parse(userInput),2).PadLeft(8,'0');
+            await Task.Delay(1000);
 
-                barMDR.Fill = Brushes.Red;
-                barMDR.Stroke= Brushes.Red;
+            barIO1.Fill = Brushes.Black;
+            barIO1.Stroke = Brushes.Black;
 
-                imgMDR1.Source = new BitmapImage(arrowActive);
+            barIN1.Fill = Brushes.Black;
+            barIN1.Stroke = Brushes.Black;
 
-                await Task.Delay(1000);
+            imgIN1.Source = new BitmapImage(arrowDesactive);
 
-                barBusMDR.Fill = Brushes.Black;
-                barBusMDR.Stroke = Brushes.Black;
-                imgMDR3.Source = new BitmapImage(arrowDesactive);
+            await Task.Delay(1000);
 
-                await Task.Delay(1000);
+            barIN2.Fill = Brushes.Red;
+            barIN2.Stroke = Brushes.Red;
 
-                barRegisBus.Stroke = Brushes.Red;
-                barRegisBus.Fill = Brushes.Red;
+            barIN3.Fill = Brushes.Red;
+            barIN3.Stroke = Brushes.Red;
 
-                imgArrowRegisBus2.Source = new BitmapImage(arrowActive);
+            await Task.Delay(1000);
 
-                await Task.Delay(1000);
+            btnSwitch.IsEnabled = true;
 
-                barMDR.Fill = Brushes.Black;
-                barMDR.Stroke = Brushes.Black;
+            await Task.Delay(1000);
 
-                imgMDR1.Source = new BitmapImage(arrowDesactive);
+            barIN2.Fill = Brushes.Black;
+            barIN2.Stroke = Brushes.Black;
 
-                Data.Data.registros[Convert.ToInt32(operation, 2)].Valor = txtMDR.Text;
+            barIN3.Fill = Brushes.Black;
+            barIN3.Stroke = Brushes.Black;
 
+            imgArrowRegisBus2.Source = new BitmapImage(arrowDesactive);
 
-                DataGridReg.Items.Clear();
-                foreach (var registros in Data.Data.registros)
-                {
-                    DataGridReg.Items.Add(registros);
-                }
-
-                await Task.Delay(1000);
-
-                barRegisBus.Stroke = Brushes.Black;
-                barRegisBus.Fill = Brushes.Black;
-
-                imgArrowRegisBus2.Source = new BitmapImage(arrowDesactive);
-
-
-
-            }
         }
 
         private async Task Output()
@@ -1688,6 +1683,11 @@ mdr -? bus (primer operando)*/
 
             await Task.Delay(1000);
 
+            barBusMDR.Fill = Brushes.Black;
+            barBusMDR.Stroke = Brushes.Black;
+
+            await Task.Delay(1000);
+
             barIO.Stroke = Brushes.Red;
             barIO.Fill = Brushes.Red;
 
@@ -1695,18 +1695,122 @@ mdr -? bus (primer operando)*/
 
             await Task.Delay(1000);
 
-            barBusMDR.Fill = Brushes.Black;
-            barBusMDR.Stroke = Brushes.Black;
-            await Task.Delay(1000);
-
-           
-            MessageBox.Show(Convert.ToInt32(txtMDR.Text, 2).ToString(), "Resultados");
-
             barIO.Stroke = Brushes.Black;
             barIO.Fill = Brushes.Black;
 
             imgIO.Source = new BitmapImage(arrowDesactive);
 
+            await Task.Delay(1000);
+
+            barIO1.Fill = Brushes.Red;
+            barIO1.Stroke = Brushes.Red;
+
+            barIO2.Fill = Brushes.Red;
+            barIO2.Stroke = Brushes.Red;
+
+            barIO3.Fill = Brushes.Red;
+            barIO3.Stroke = Brushes.Red;
+
+            barOUT1.Fill = Brushes.Red;
+            barOUT1.Stroke = Brushes.Red;
+
+            imgOUT1.Source = new BitmapImage(arrowActive);
+
+            await Task.Delay(1000);
+
+            barIO1.Fill = Brushes.Black;
+            barIO1.Stroke = Brushes.Black;
+
+            barIO2.Fill = Brushes.Black;
+            barIO2.Stroke = Brushes.Black;
+
+            barIO3.Fill = Brushes.Black;
+            barIO3.Stroke = Brushes.Black;
+
+            barOUT1.Fill = Brushes.Black;
+            barOUT1.Stroke = Brushes.Black;
+
+            imgOUT1.Source = new BitmapImage(arrowDesactive);
+
+            await Task.Delay(1000);
+
+            txtPuerto1.Text = Convert.ToInt32(txtMDR.Text, 2).ToString();
+
+            await Task.Delay(1000);
+
+            barOUT2.Fill = Brushes.Red;
+            barOUT2.Stroke = Brushes.Red;
+
+            barOUT3.Fill = Brushes.Red;
+            barOUT3.Stroke = Brushes.Red;
+
+            barOUT4.Fill = Brushes.Red;
+            barOUT4.Stroke = Brushes.Red;
+
+            barOUT5.Fill = Brushes.Red;
+            barOUT5.Stroke = Brushes.Red;
+
+            await Task.Delay(1000);
+
+            barOUT2.Fill = Brushes.Black;
+            barOUT2.Stroke = Brushes.Black;
+
+            barOUT3.Fill = Brushes.Black;
+            barOUT3.Stroke = Brushes.Black;
+
+            barOUT4.Fill = Brushes.Black;
+            barOUT4.Stroke = Brushes.Black;
+
+            barOUT5.Fill = Brushes.Black;
+            barOUT5.Stroke = Brushes.Black;
+
+            await Task.Delay(1000);
+
+            if(Convert.ToInt32(txtMDR.Text, 2) == 0)
+            {
+                imgLed.Source = new BitmapImage(ledOff);
+            }else
+            {
+                imgLed.Source = new BitmapImage(ledOn);
+            }
+
+            await Task.Delay(1000);
+
+            barOUT6.Fill = Brushes.Red;
+            barOUT6.Stroke = Brushes.Red;
+
+            barOUT7.Fill = Brushes.Red;
+            barOUT7.Stroke = Brushes.Red;
+
+            barOUT8.Fill = Brushes.Red;
+            barOUT8.Stroke = Brushes.Red;
+
+            barOUT9.Fill = Brushes.Red;
+            barOUT9.Stroke = Brushes.Red;
+
+            barOUT10.Fill = Brushes.Red;
+            barOUT10.Stroke = Brushes.Red;
+
+            await Task.Delay(1000);
+
+            barOUT6.Fill = Brushes.Black;
+            barOUT6.Stroke = Brushes.Black;
+
+            barOUT7.Fill = Brushes.Black;
+            barOUT7.Stroke = Brushes.Black;
+
+            barOUT8.Fill = Brushes.Black;
+            barOUT8.Stroke = Brushes.Black;
+
+            barOUT9.Fill = Brushes.Black;
+            barOUT9.Stroke = Brushes.Black;
+
+            barOUT10.Fill = Brushes.Black;
+            barOUT10.Stroke = Brushes.Black;
+
+
+
+            MessageBox.Show(Convert.ToInt32(txtMDR.Text, 2).ToString(), "Resultados");
 
 
 
@@ -1889,6 +1993,267 @@ mdr -? bus (primer operando)*/
         private void DataGridIns_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private async void btnSwitch_Click(object sender, RoutedEventArgs e)
+        {
+
+            await Task.Run(async () =>
+            {
+                await outtAsync();
+            });
+           
+
+        }
+
+        private async Task outtAsync()
+        {
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                barIN4.Fill = Brushes.Red;
+                barIN4.Stroke = Brushes.Red;
+
+                barIN5.Fill = Brushes.Red;
+                barIN5.Stroke = Brushes.Red;
+
+                barIN6.Fill = Brushes.Red;
+                barIN6.Stroke = Brushes.Red;
+
+                barIN7.Fill = Brushes.Red;
+                barIN7.Stroke = Brushes.Red;
+
+                barIN8.Fill = Brushes.Red;
+                barIN8.Stroke = Brushes.Red;
+            });
+            await Task.Delay(1000);
+
+
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                barIN4.Fill = Brushes.Black;
+                barIN4.Stroke = Brushes.Black;
+
+                barIN5.Fill = Brushes.Black;
+                barIN5.Stroke = Brushes.Black;
+
+                barIN6.Fill = Brushes.Black;
+                barIN6.Stroke = Brushes.Black;
+
+                barIN7.Fill = Brushes.Black;
+                barIN7.Stroke = Brushes.Black;
+
+                barIN8.Fill = Brushes.Black;
+                barIN8.Stroke = Brushes.Black;
+            });
+
+            await Task.Delay(1000);
+
+            bool? result = true;
+            BoxInput inputBox = null;
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                inputBox = new BoxInput();
+                result = inputBox.ShowDialog();
+            });
+
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+
+                barIN4.Fill = Brushes.Red;
+                barIN4.Stroke = Brushes.Red;
+
+                barIN5.Fill = Brushes.Red;
+                barIN5.Stroke = Brushes.Red;
+
+                barIN6.Fill = Brushes.Red;
+                barIN6.Stroke = Brushes.Red;
+
+                barIN7.Fill = Brushes.Red;
+                barIN7.Stroke = Brushes.Red;
+
+                barIN8.Fill = Brushes.Red;
+                barIN8.Stroke = Brushes.Red;
+            });
+            await Task.Delay(1000);
+
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+
+                barIN4.Fill = Brushes.Black;
+                barIN4.Stroke = Brushes.Black;
+
+                barIN5.Fill = Brushes.Black;
+                barIN5.Stroke = Brushes.Black;
+
+                barIN6.Fill = Brushes.Black;
+                barIN6.Stroke = Brushes.Black;
+
+                barIN7.Fill = Brushes.Black;
+                barIN7.Stroke = Brushes.Black;
+
+                barIN8.Fill = Brushes.Black;
+                barIN8.Stroke = Brushes.Black;
+            });
+
+            await Task.Delay(1000);
+
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                barIN2.Fill = Brushes.Red;
+                barIN2.Stroke = Brushes.Red;
+
+                barIN3.Fill = Brushes.Red;
+                barIN3.Stroke = Brushes.Red;
+            });
+
+            await Task.Delay(1000);
+
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                btnSwitch.IsEnabled = false;
+            });
+            await Task.Delay(1000);
+
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+
+                barIN2.Fill = Brushes.Black;
+                barIN2.Stroke = Brushes.Black;
+
+                barIN3.Fill = Brushes.Black;
+                barIN3.Stroke = Brushes.Black;
+
+            });
+
+            await Task.Delay(1000);
+
+
+            if (result == true)
+            {
+                string userInput = "no contenido";
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    userInput = inputBox.InputText;
+                });
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    txtPuerto0.Text = userInput;
+                });
+                await Task.Delay(1000);
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    barIO1.Fill = Brushes.Red;
+                    barIO1.Stroke = Brushes.Red;
+
+                    barIN1.Fill = Brushes.Red;
+                    barIN1.Stroke = Brushes.Red;
+
+                    imgIN1.Source = new BitmapImage(arrowActive);
+                });
+
+                await Task.Delay(1000);
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+
+                    barIO1.Fill = Brushes.Black;
+                    barIO1.Stroke = Brushes.Black;
+
+                    barIN1.Fill = Brushes.Black;
+                    barIN1.Stroke = Brushes.Black;
+
+                    imgIN1.Source = new BitmapImage(arrowDesactive);
+                });
+
+                await Task.Delay(1000);
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    barBusMDR.Fill = Brushes.Red;
+                    barBusMDR.Stroke = Brushes.Red;
+                    imgMDR3.Source = new BitmapImage(arrowActive);
+                });
+
+                await Task.Delay(1000);
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+
+                    barIO.Stroke = Brushes.Black;
+                    barIO.Fill = Brushes.Black;
+
+                    imgIO.Source = new BitmapImage(arrowDesactive);
+                });
+
+
+                await Task.Delay(1000);
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+
+                    txtMDR.Text = txtPuerto0.Text;
+
+                    barMDR.Fill = Brushes.Red;
+                    barMDR.Stroke = Brushes.Red;
+
+                    imgMDR1.Source = new BitmapImage(arrowActive);
+                });
+
+                await Task.Delay(1000);
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+
+                    barBusMDR.Fill = Brushes.Black;
+                    barBusMDR.Stroke = Brushes.Black;
+                    imgMDR3.Source = new BitmapImage(arrowDesactive);
+                });
+
+                await Task.Delay(1000);
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+
+                    barRegisBus.Stroke = Brushes.Red;
+                    barRegisBus.Fill = Brushes.Red;
+
+                    imgArrowRegisBus2.Source = new BitmapImage(arrowActive);
+                });
+
+                await Task.Delay(1000);
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+
+                    barMDR.Fill = Brushes.Black;
+                    barMDR.Stroke = Brushes.Black;
+
+                    imgMDR1.Source = new BitmapImage(arrowDesactive);
+                    MessageBox.Show(Data.Data.pc.ToString());
+                    string operando = Data.Data.memoria[Data.Data.pc - 1].Valor.Substring(4, 6);
+                    Data.Data.registros[Convert.ToInt32(operando, 2)].Valor = txtMDR.Text;
+
+
+                    DataGridReg.Items.Clear();
+                    foreach (var registros in Data.Data.registros)
+                    {
+                        DataGridReg.Items.Add(registros);
+                    }
+
+                });
+
+                await Task.Delay(1000);
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+
+                    barRegisBus.Stroke = Brushes.Black;
+                    barRegisBus.Fill = Brushes.Black;
+                    imgArrowRegisBus2.Source = new BitmapImage(arrowDesactive);
+
+                });
+                /**/
+
+            }
         }
     }
 }

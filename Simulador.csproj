@@ -207,5 +207,21 @@
   <ItemGroup>
     <Resource Include="Recursos\arrow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\led_off.png" />
+    <Resource Include="Recursos\led_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\Captura de pantalla 2023-11-18 210232.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screens\Captura de pantalla 2023-11-18 210232.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screens\led_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Screens\led_on.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
