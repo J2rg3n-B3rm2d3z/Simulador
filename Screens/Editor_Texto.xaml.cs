@@ -104,7 +104,15 @@ namespace Simulador.Screens
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
-            editor_Execute.acciones();
+            
+              editor_Execute.acciones();
+
+            if (editor_Execute.n)
+            {
+                btnPaso.IsEnabled = false;
+            }
+
+        
         }
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
@@ -118,6 +126,7 @@ namespace Simulador.Screens
 
         private void btnRebobinar_Click(object sender, RoutedEventArgs e)
         {
+            btnPaso.IsEnabled = true;
             MyFrame.Content = null;
             editor_Execute = new Editor_Execute();
             MyFrame.NavigationService.Navigate(editor_Execute);

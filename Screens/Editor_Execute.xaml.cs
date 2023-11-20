@@ -31,6 +31,8 @@ namespace Simulador.Screens
         bool acarreo = false;
         bool overflow = false;
 
+        public bool n = false;
+
 
         /*ObservableCollection<Data.Data.Registro> items = new ObservableCollection<Data.Data.Registro>();*/
 
@@ -38,6 +40,8 @@ namespace Simulador.Screens
         {
 
             Data.Data.pc = 0;
+
+            n = false;
 
             InitializeComponent();
             if (!Data.Data.initialization)
@@ -155,7 +159,8 @@ namespace Simulador.Screens
             string instruccionAux = Data.Data.memoria[Data.Data.pc].Valor.Substring(12, 4);
             string instruccion = Data.Data.memoria[Data.Data.pc].Valor.Substring(0, 4);
 
-            
+            if (n)
+                return;
 
             if (instruccionAux.Contains("1111"))
             {
@@ -202,14 +207,16 @@ namespace Simulador.Screens
 
             if (instruccion.Contains("1101"))
             {
+
                 MessageBox.Show("La Ejecucion a Terminado");
                 Data.Data.pc = 0;
+
+                n = true;
             }
             else
             {
                 Data.Data.pc += 1;
             }
-            
 
         }
 
@@ -649,6 +656,43 @@ mdr -? bus (primer operando)*/
 
         }
 
+
+        private  bool HasCarry(string binaryA, string binaryB)
+        {
+            int maxLength = Math.Max(binaryA.Length, binaryB.Length);
+            int carry = 0;
+
+            for (int i = 0; i < maxLength; i++)
+            {
+                int bitA = (i < binaryA.Length) ? binaryA[binaryA.Length - 1 - i] - '0' : 0;
+                int bitB = (i < binaryB.Length) ? binaryB[binaryB.Length - 1 - i] - '0' : 0;
+
+                int sum = bitA + bitB + carry;
+
+                if (sum > 1)
+                {
+                    carry = 1;
+                }
+                else
+                {
+                    carry = 0;
+                }
+            }
+
+            return (carry == 1);
+        }
+
+        public static bool HasCarryInBinaryMultiplication(string binaryA, string binaryB)
+        {
+            string product = Convert.ToString(Convert.ToInt32(binaryA, 2) * Convert.ToInt32(binaryB, 2), 2);
+
+            // Verificar si hay un acarreo observando el bit más alto del resultado
+            return product.Length > Math.Max(binaryA.Length, binaryB.Length) && product[0] == '1';
+        }
+
+        
+
+
         private async Task operation()
         {
             string operando2 = Data.Data.memoria[Data.Data.pc].Valor.Substring(10, 6);
@@ -852,14 +896,19 @@ mdr -? bus (primer operando)*/
                 if (instruccion.Equals("0000"))
                 {
                     txtZ.Text =Convert.ToString( (Convert.ToInt32(info, 2) + Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2)),2).PadLeft(6,'0');
-                    
+                    if (HasCarry(info, Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor))
+                        acarreo = true;
+                    else 
+                        acarreo = false;
                 }
                 else if (instruccion.Equals("0001"))
                 {
                     txtZ.Text = ( Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2) - Convert.ToInt32(info, 2)).ToString();
+                    acarreo = false;
                 }
                 else if (instruccion.Equals("0010"))
                 {
+                    acarreo = false;
                     try
                     {
                         txtZ.Text = (Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2) / Convert.ToInt32(info, 2)).ToString();
@@ -875,13 +924,19 @@ mdr -? bus (primer operando)*/
                 else if (instruccion.Equals("0011"))
                 {
                     txtZ.Text = ( Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2) % Convert.ToInt32(info, 2)).ToString();
+                    acarreo = false;
                 }
                 else if (instruccion.Equals("0100"))
                 {
-
+                    acarreo = false;
                     try
                     {
                         txtZ.Text = (Convert.ToInt32(info, 2) * Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2)).ToString();
+                        
+                        if (HasCarryInBinaryMultiplication(info, Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor))
+                            acarreo = true;
+                        
+                            
                     }
                     catch (Exception ex)
                     {
@@ -1122,27 +1177,63 @@ mdr -? bus (primer operando)*/
                 await Task.Delay(1000);
 
 
-
                 if (instruccion.Equals("0000"))
                 {
                     txtZ.Text = Convert.ToString((Convert.ToInt32(info, 2) + Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)), 2).PadLeft(6, '0');
+                    
+                    if (HasCarry(info, Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor))
+                        acarreo = true;
+                    else
+                        acarreo = false;
                 }
                 else if (instruccion.Equals("0001"))
                 {
                     txtZ.Text = (Convert.ToInt32(info, 2) - Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2) ).ToString();
+                    acarreo = false;
                 }
                 else if (instruccion.Equals("0010"))
                 {
-                    txtZ.Text = (Convert.ToInt32(info, 2) / Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                    acarreo = false;
+                    try
+                    {
+                        txtZ.Text = (Convert.ToInt32(info, 2) / Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        ultimoResultado = "";
+                        overflow = true;
+                        return;
+                    }
                 }
                 else if (instruccion.Equals("0011"))
                 {
                     txtZ.Text = (Convert.ToInt32(info, 2) % Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                    acarreo = false;
                 }
                 else if (instruccion.Equals("0100"))
                 {
-                    txtZ.Text = (Convert.ToInt32(info, 2) * Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                    acarreo = false;
+                    try
+                    {
+                        txtZ.Text = (Convert.ToInt32(info, 2) * Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+
+                        if (HasCarryInBinaryMultiplication(info, Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor))
+                            acarreo = true;
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ultimoResultado = "";
+                        overflow = true;
+                        return;
+                    }
                 }
+
+                overflow = false;
+
+
+                ultimoResultado = txtZ.Text;
 
                 await Task.Delay(1000);
 
@@ -1310,28 +1401,67 @@ mdr -? bus (primer operando)*/
 
                 await Task.Delay(1000);
 
-
+                
 
                 if (instruccion.Equals("0000"))
                 {
+                    int suma = Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2) + Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2);
                     txtZ.Text = Convert.ToString((Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2) + Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2)), 2).PadLeft(6, '0');
+
+                    
+                    
+                    if (HasCarry(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor))
+                        acarreo = true;
+                    else
+                        acarreo = false;
                 }
                 else if (instruccion.Equals("0001"))
                 {
                     txtZ.Text = (Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2) - Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                    acarreo = false;
                 }
                 else if (instruccion.Equals("0010"))
                 {
-                    txtZ.Text = (Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2) / Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                    acarreo = false;
+                    try
+                    {
+                        txtZ.Text = (Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2) / Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        ultimoResultado = "";
+                        overflow = true;
+                        return;
+                    }
                 }
                 else if (instruccion.Equals("0011"))
                 {
                     txtZ.Text = (Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2) % Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2)).ToString();
+                    acarreo = false;
                 }
                 else if (instruccion.Equals("0100"))
                 {
-                    txtZ.Text = (Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2) * Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2)).ToString();
+                    acarreo = false;
+                    try
+                    {
+                        txtZ.Text = (Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, 2) * Convert.ToInt32(Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor, 2)).ToString();
+                        if (HasCarryInBinaryMultiplication(Data.Data.registros[Convert.ToInt32(operando2, 2)].Valor, Data.Data.registros[Convert.ToInt32(operando1, 2)].Valor))
+                            acarreo = true;
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ultimoResultado = "";
+                        overflow = true;
+                        return;
+                    }
                 }
+
+                overflow = false;
+
+
+                ultimoResultado = txtZ.Text;
 
                 await Task.Delay(1000);
 
@@ -1892,7 +2022,7 @@ mdr -? bus (primer operando)*/
             int index = Data.Data.BanderaMemoria.FindIndex(x => x.Valor.Equals(jump));
             string info = Data.Data.BanderaMemoria[index].NumMem.ToString();
 
-            MessageBox.Show(info);
+            
 
             txtMDR.Text = Convert.ToString(int.Parse(info), 2).PadLeft(6, '0'); ;
 
@@ -1940,7 +2070,11 @@ mdr -? bus (primer operando)*/
             }
             else if (instruccion.Equals("1010"))
             {
-
+                if (acarreo)
+                {
+                    txtPC.Text = txtMDR.Text;
+                    Data.Data.pc = Data.Data.BanderaMemoria[index].NumMem - 1;
+                }
             }
             else if (instruccion.Equals("1011"))
             {
